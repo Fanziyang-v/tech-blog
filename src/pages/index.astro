@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('posts', ({data})=>!data.draft)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+const base = import.meta.env.BASE_URL;
+---
+<Base title="技术笔记" description="用中文记录技术原理、工程实践与学习笔记。"><main id="main" class="shell blog"><div class="blog-head"><p class="eyebrow">Notes & explorations</p><h1>技术笔记</h1><p class="intro muted">记录问题，理解原理，留下思考。</p></div><p class="meta">全部文章 · {posts.length} 篇</p>{posts.map(post=><a class="post" href={`${base}posts/${post.id}/`}><time class="meta" datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0,10)}</time><h2>{post.data.title}</h2><p>{post.data.description}</p><div>{post.data.tags.map(tag=><span class="tag">{tag}</span>)}</div></a>)}</main></Base>

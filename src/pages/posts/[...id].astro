@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths(){return (await getCollection('posts',({data})=>!data.draft)).map(post=>({params:{id:post.id},props:{post}}));}
+const {post}=Astro.props;
+const {Content, headings}=await render(post);
+---
+<Base title={post.data.title} description={post.data.description}><main id="main" class="shell blog"><a href={import.meta.env.BASE_URL}>← 全部文章</a><article><p class="meta"><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0,10)}</time> · Ziyang Fan</p><h1>{post.data.title}</h1><p class="intro muted">{post.data.description}</p>{headings.length>0&&<details class="toc" open><summary>文章目录</summary><ul>{headings.filter(h=>h.depth===2).map(h=><li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></details>}<div class="prose"><Content/></div></article></main></Base>
