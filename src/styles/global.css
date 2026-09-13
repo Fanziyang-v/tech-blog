@@ -2,3 +2,18 @@
 /* Keep wide display equations scrollable on small screens. */
 .prose .katex-display{overflow-x:auto;overflow-y:hidden;padding:0.5em 0}
 .prose .katex-display > .katex{font-size:1.1em}
+
+.prose .markdown-alert{--alert-color:#215fc0;border-left:4px solid var(--alert-color);border-radius:0 6px 6px 0;background:color-mix(in srgb,var(--alert-color) 7%,var(--bg));padding:14px 20px}
+.prose .markdown-alert-tip{--alert-color:#227641}
+.prose .markdown-alert-important{--alert-color:#7952b3}
+.prose .markdown-alert-warning{--alert-color:#926300}
+.prose .markdown-alert-caution{--alert-color:#c33232}
+.prose .markdown-alert-title{color:var(--alert-color);font-weight:600;margin:0 0 10px}
+.prose .markdown-alert>:last-child{margin-bottom:0}
+@media(prefers-color-scheme:dark){
+  .prose .markdown-alert-note{--alert-color:#8bb8ff}
+  .prose .markdown-alert-tip{--alert-color:#75cf95}
+  .prose .markdown-alert-important{--alert-color:#c3a0f0}
+  .prose .markdown-alert-warning{--alert-color:#e3bd63}
+  .prose .markdown-alert-caution{--alert-color:#ff9292}
+}
